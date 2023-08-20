@@ -76,8 +76,14 @@ class AnalyticsRepository {
         }
       }
     ]
-    const templates = await AnalyticsModel.aggregate(query);
-    var finaldata = [];
+    var templates = await AnalyticsModel.aggregate(query);
+    templates = templates.map(item => {
+      return {
+          count: item.count,
+          label:  "POST " +item.label 
+      };
+  });
+  
     var totalusercount = await this.TotalUsersCount();
     var totalpublishedpost = await this.TotalPublishedPOST();
     var totaldraftpost = await this.TotalDraftPOST();
