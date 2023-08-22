@@ -5,6 +5,8 @@ const {
   GetPagination,
   GetSortByFromRequest,
 } = require("../utils");
+const ApiLog = require("./middlewares/apilogs");
+
 
 const { Validator } = require("node-input-validator");
 
@@ -29,7 +31,7 @@ module.exports = (app) => {
     }
   });
 
-  app.post("/posts",  async (req, res, next) => {
+  app.post("/posts",ApiLog,  async (req, res, next) => {
     try {
       const { limit, skip } = await GetPagination(req.body.page, req.body.size);
       var sortarray = await GetSortByFromRequest(
@@ -45,7 +47,7 @@ module.exports = (app) => {
   });
 
   
-  app.post("/getallreels",  async (req, res, next) => {
+  app.post("/getallreels",ApiLog,  async (req, res, next) => {
     try {
       const { limit, skip } = await GetPagination(req.body.page, req.body.size);
       var sortarray = await GetSortByFromRequest(
@@ -93,7 +95,7 @@ module.exports = (app) => {
       next(error);
     }
   });
-  app.post("/postlike",  async (req, res, next) => {
+  app.post("/postlike", ApiLog, async (req, res, next) => {
     try {
       const v = new Validator(req.body, {
         user: "required",
@@ -110,7 +112,7 @@ module.exports = (app) => {
       next(error);
     }
   });
-  app.post("/getallpostlike",  async (req, res, next) => {
+  app.post("/getallpostlike",ApiLog,  async (req, res, next) => {
     try {
       const v = new Validator(req.body, {
         user: "required",
@@ -126,7 +128,7 @@ module.exports = (app) => {
       next(error);
     }
   });
-  app.post("/postwishlist",  async (req, res, next) => {
+  app.post("/postwishlist", ApiLog, async (req, res, next) => {
     try {
       const v = new Validator(req.body, {
         user: "required",
@@ -143,7 +145,7 @@ module.exports = (app) => {
       next(error);
     }
   });
-  app.post("/getallwishlits",  async (req, res, next) => {
+  app.post("/getallwishlits",ApiLog,  async (req, res, next) => {
     try {
       const v = new Validator(req.body, {
         user: "required",
@@ -159,7 +161,7 @@ module.exports = (app) => {
       next(error);
     }
   });
-  app.post("/post/:id",  async (req, res, next) => {
+  app.post("/post/:id",  ApiLog,async (req, res, next) => {
     try {
       var data = await service.postById(req.params.id);
       data = await GetApiResponse(data);
@@ -201,7 +203,7 @@ module.exports = (app) => {
       next(error);
     }
   });
-  app.delete("/postwishlistremove",  async (req, res, next) => {
+  app.delete("/postwishlistremove",  ApiLog,async (req, res, next) => {
     try {
 
       var data = await service.RemovePostWishlist(req.body);

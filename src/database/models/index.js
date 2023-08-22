@@ -13,4 +13,6 @@ module.exports = {
   MediaModel: require('./media'),
   UserModel: require('./user'),
   AnalyticsModel: require('./analytics'),
+  ApiLogs: require("./apilogs"),
+
 };
