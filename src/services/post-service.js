@@ -183,6 +183,7 @@ class PostService {
         q.push(q3)
 
       
+        console.log(JSON.stringify(q))
       var PostResult   = await this.repository.GetPosts(q);
       const myInstance = this;
 

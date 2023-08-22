@@ -118,7 +118,7 @@ module.exports.paginateResults = async (
               
 
                 value = String(value);
-                var js = { [key]: { $regex: value, $options: "i" } };
+                var js = { [key]: value };
               
             }
             var matchdata = { $match: js }; // Use this to sort documents by newest first
