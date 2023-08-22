@@ -83,6 +83,14 @@ class PostRepository {
             }
           ]
         }
+      },
+      {
+        '$match': {
+          'posts': {
+            '$exists': true, 
+            '$ne': []
+          }
+        }
       }
     ]
     const postresult = await PostLikeModel.aggregate(query);
@@ -172,6 +180,13 @@ class PostRepository {
               }
             }
           ]
+        }
+      },{
+        '$match': {
+          'posts': {
+            '$exists': true, 
+            '$ne': []
+          }
         }
       }
     ]
