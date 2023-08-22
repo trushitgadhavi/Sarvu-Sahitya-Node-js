@@ -133,6 +133,23 @@ class PostService {
     try{
 
       matchdata["post_status"] = "Published";
+      var extra_query =  {
+        '$match': {
+          '$or': [
+            {
+              'reel_video_link': {
+                '$eq': ''
+              }
+            },
+            {
+              'reel_video_link': {
+                '$eq': null
+              }
+            }
+          ]
+        }
+      };
+      matchdata["extra_query"] =   extra_query
       // var extra_query = {
       //   '$match': {
       //       $or:[
