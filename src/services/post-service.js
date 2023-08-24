@@ -398,6 +398,7 @@ class PostService {
       
 
 
+      // await NotificationService.SendNotificationUser(userInputs,user_id_list)
       await NotificationService.SendNotificationToAllUser(userInputs)
       var formdata = {
         id:postdata._id,

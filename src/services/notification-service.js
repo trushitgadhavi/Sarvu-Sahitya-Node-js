@@ -20,7 +20,6 @@ class NotificationService {
     try{
 
         var user_fcm_token_list = await this.userrepository.GetUserFcmtoken(user_id_list)
-        console.log(user_fcm_token_list)
         userInputs.user_fcm_token_list = user_fcm_token_list
         
         // for Firebase Send All Data Which has string not send boolean data it must be in String
@@ -55,6 +54,7 @@ class NotificationService {
             tokens: user_fcm_token_list
           };
         var notifcation = await  admin.messaging().sendMulticast(finalmessage)
+        console.log(notifcation)
           return NotificationResult
            
     }catch(error){
@@ -67,6 +67,10 @@ class NotificationService {
     try{
         
         var user_fcm_token_list = await this.userrepository.GetAllFcmToken()
+         user_fcm_token_list = user_fcm_token_list.filter(item => {
+          return item !== null && item !== undefined && item !== '';
+        });
+        
         userInputs.user_fcm_token_list = user_fcm_token_list
         
         // for Firebase Send All Data Which has string not send boolean data it must be in String
@@ -98,7 +102,6 @@ class NotificationService {
     
             tokens: user_fcm_token_list
           };
-          console.log(finalmessage)
         var notifcation = await  admin.messaging().sendMulticast(finalmessage)
           return NotificationResult
            
